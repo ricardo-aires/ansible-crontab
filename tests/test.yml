@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: apply cron setup role
+      include_role:
+        name: cron_setup

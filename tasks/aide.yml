@@ -1,0 +1,34 @@
+---
+# tasks file for setup aide cron job
+- name: ensure AIDE is installed
+  yum:
+    name: aide
+    state: present
+
+- name: ensure aide is setup
+  block:
+    - name: check aide database
+      command: aide --check
+      register: aide_status
+      failed_when: aide_status.rc > 10
+      changed_when: false
+  rescue:
+    - name: generate an aide initial database
+      command: aide --init
+    - name: rename aide database
+      copy:
+        src: /var/lib/aide/aide.db.new.gz
+        dest: /var/lib/aide/aide.db.gz
+        owner: root
+        group: root
+        mode: '0600'
+        remote_src: yes
+
+- name: ensure filesystem integrity is regularly checked
+  cron:
+    name: aide check
+    hour: "5"
+    minute: "0"
+    user: root
+    job: "/usr/sbin/aide --check"
+    cron_file: aide-check

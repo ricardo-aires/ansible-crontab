@@ -1,0 +1,6 @@
+---
+# tasks file for cron_setup
+- name: setup crond
+  include_tasks: setup.yml
+- name: setup aide cron job
+  include_tasks: aide.yml
