@@ -4,12 +4,11 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
   config.vm.hostname = "cron.lab.com"
   config.vm.network "private_network", ip: "192.168.33.10"
-  config.vbguest.auto_update = false
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "cron"
     vb.cpus = 1
-    vb.memory = "2048"
+    vb.memory = "1024"
     vb.customize ["modifyvm", :id, "--audio", "none"]
   end
 end

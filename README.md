@@ -48,4 +48,3 @@ This role doesn't have any dependencies.
 ## Example Playbook
 
 A working example using Vagrant and Virtual Box is setup under [tests](./tests/).
-

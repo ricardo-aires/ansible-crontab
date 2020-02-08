@@ -1,8 +1,9 @@
 ---
-- hosts: all
+- name: setup crontab
+  hosts: cron
   become: true
 
   tasks:
-    - name: apply cron setup role
-      include_role:
-        name: ansible-crontab
+    - name: apply crontab role
+      import_role:
+        name: crontab
